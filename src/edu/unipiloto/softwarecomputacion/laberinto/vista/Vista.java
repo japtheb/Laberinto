@@ -13,13 +13,13 @@ import javax.swing.JTextField;
 
 public class Vista extends JFrame{
 	
-	JButton buttons[][] = new JButton[10][10]; 
+	JTextField fields[][] = new JTextField[10][10]; 
 	
 	public Vista(){
-		super("Torres de Hanoi");
+		super("Laberinto");
 		this.setLayout(new GridBagLayout());
 		iniciarVista();
-		setSize(700, 500);
+		setSize(500, 500);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,13 +32,16 @@ public class Vista extends JFrame{
 		//TODO agregar botones
 		for (int i=0 ; i<10 ; i++){
 			for(int j=0 ; j<10 ; j++){
-				buttons[i][j] = 
-				
+				fields[i][j] = new JTextField();
+				fields[i][j].setEditable(false);
+				fields[i][j].setHorizontalAlignment(JTextField.CENTER);
 				gbc.gridx = j;
 				gbc.gridy = i;
+				gbc.weighty = 1;
+				gbc.weightx = 1;
 				gbc.fill = GridBagConstraints.HORIZONTAL;
 				
-				add(buttons[i][j],gbc);
+				add(fields[i][j],gbc);
 			}
 		}
 	}
@@ -47,8 +50,20 @@ public class Vista extends JFrame{
 		//TODO agregar color botones
 		for (int i=0 ; i<10 ; i++){
 			for(int j=0 ; j<10 ; j++){
-				if(resultado[i][j]==1)
-				buttons[i][j].setBackground(Color.RED); 
+				if(resultado[i][j]==1){
+					fields[i][j].setBackground(Color.RED);
+					fields[i][j].setOpaque(true);
+				}
+			}
+		}
+	}
+
+	public void setMatrizObstaculos(int[][] obstaculos) {
+		for (int i=0 ; i<10 ; i++){
+			for(int j=0 ; j<10 ; j++){
+				if(obstaculos[i][j]==1){
+					fields[i][j].setText("1"); 
+				}
 			}
 		}
 	}

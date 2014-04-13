@@ -15,10 +15,12 @@ public class Controlador{
 	
 	public Controlador(){
 		vista = new Vista();
-		laberinto = new LaberintoModelo(10, 10);
+		laberinto = new LaberintoModelo();
+		int[][] obstaculos = laberinto.getObstaculos();
 		int[][] resultado = laberinto.getResultado();
 		//TODO
 		//recorrer la vista y modificar
+		vista.setMatrizObstaculos(obstaculos);
 		vista.setMatrizResultado(resultado);
 	}
 	

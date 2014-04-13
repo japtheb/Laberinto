@@ -28,26 +28,24 @@ public class LaberintoModelo {
 			}
 		}while(obstaculosPuestos<numObstaculos);
 		
-		makeMove(0,0);
+		hacerMovimiento(0,0);
 	}
 	
-	private boolean found = false;
+	private boolean encontrado = false;
 
-	protected void makeMove(int row, int col) {
-	    if (row < 0 || row >= 10 
-	     || col < 0 || col >= 10 
-	     || resultado[row][col] == 1
-	     || obstaculos[row][col] == 1)
+	protected void hacerMovimiento(int fila, int col) {
+	    if (fila < 0 || fila >= 10 || col < 0 || col >= 10 || resultado[fila][col] == 1 || obstaculos[fila][col] == 1)
 	        return;
 
-	    resultado[row][col] = 1;
-	    found = row == 10 && col == 10;
+	    resultado[fila][col] = 1;
+	    if(fila == 10 && col == 10)
+	    	encontrado = true;
 
-	    if (!found) {
-	        makeMove(row, col - 1);
-	        makeMove(row, col + 1);
-	        makeMove(row - 1, col);
-	        makeMove(row + 1, col);
+	    if (!encontrado) {
+	    	hacerMovimiento(fila, col - 1);
+	    	hacerMovimiento(fila, col + 1);
+	    	hacerMovimiento(fila - 1, col);
+	    	hacerMovimiento(fila + 1, col);
 	    }
 	}
 
